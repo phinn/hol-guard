@@ -96,6 +96,88 @@ Older releases are preserved in the [changelog archive](docs/changelog-archive.m
 * **native:** a package-intent parse now sends the caller's `PATH` to the resident. The resident is long-lived, so its own `PATH` is the one it was spawned with; a manager it cannot resolve (`npx` from a test or tool directory) made the TypeScript launch evidence incomplete and sent a contained typecheck back to review even though the caller resolved the manager fine.
 * **native:** a resident that answers a context-digest request with its own error envelope is now reported by that code — and recorded against the resilience breaker — instead of being flattened into `native_context_digest_result_invalid`. An envelope outside the contract keeps its code in the rejection reason, and a rejected result names the contract clause that rejected it with the offending keys, so a foreign frame, a stale frame and a truncated read are no longer indistinguishable.
 
+## [3.61.0](https://github.com/hashgraph-online/hol-guard/compare/v3.60.0...v3.61.0) (2026-11-20)
+
+
+### Features
+
+* **cigar:** ask Codex for short replies when CIGAR is on ([#8092](https://github.com/hashgraph-online/hol-guard/issues/8092)) ([9fe5db0](https://github.com/hashgraph-online/hol-guard/commit/9fe5db03c5693e4c687a32b3ea656813aefec0b4))
+* **guard:** opt-in git rules for hook bypass and whole-tree staging ([#8008](https://github.com/hashgraph-online/hol-guard/issues/8008)) ([7cf54a2](https://github.com/hashgraph-online/hol-guard/commit/7cf54a21efd528568c4d98778cbea616c2e1c9f7))
+* **mcp-servers:** add deadbolt MCP contribution and trust binding ([#8057](https://github.com/hashgraph-online/hol-guard/issues/8057)) ([7b37d8b](https://github.com/hashgraph-online/hol-guard/commit/7b37d8b896a0364ee076be6fc06aef1d38e5713c))
+* **mcp-servers:** add hydrascope MCP contribution and trust binding ([#8055](https://github.com/hashgraph-online/hol-guard/issues/8055)) ([74af4bf](https://github.com/hashgraph-online/hol-guard/commit/74af4bf7c4692fb6645abb42160265d9a4583bd4))
+* **mcp-servers:** add krusch-frontend-mcp contribution and trust binding ([#8053](https://github.com/hashgraph-online/hol-guard/issues/8053)) ([242b77e](https://github.com/hashgraph-online/hol-guard/commit/242b77ecd69c6e5a1bd292ff541ad562fcba3d27))
+* **mcp-servers:** add krusch-fs MCP contribution and trust binding ([#8056](https://github.com/hashgraph-online/hol-guard/issues/8056)) ([d42e246](https://github.com/hashgraph-online/hol-guard/commit/d42e24636cd1956b1729f89f56165c7d28a05edb))
+* **mcp-servers:** add krusch-grounded-harness contribution and trust binding ([#8054](https://github.com/hashgraph-online/hol-guard/issues/8054)) ([f1df994](https://github.com/hashgraph-online/hol-guard/commit/f1df9948470a1221f39e2b5eb2dbf926e4a3e7c9))
+* **mcp-servers:** add krusch-skylight MCP contribution and trust binding ([#8058](https://github.com/hashgraph-online/hol-guard/issues/8058)) ([43a00c1](https://github.com/hashgraph-online/hol-guard/commit/43a00c14c22b6f6eccd69b7b9f3a086949b8f31b))
+* **mcp-servers:** add krusch-stack MCP contribution and trust binding ([#8059](https://github.com/hashgraph-online/hol-guard/issues/8059)) ([162f619](https://github.com/hashgraph-online/hol-guard/commit/162f61928b502f531e78e1f86e911f7e3f1af4ca))
+* **mcp-servers:** add LocalSites MCP contribution ([#8075](https://github.com/hashgraph-online/hol-guard/issues/8075)) ([86fbdcc](https://github.com/hashgraph-online/hol-guard/commit/86fbdcc2ad72b8bb83b5a18fd191c38bdee61d21))
+* **mcp:** add New Jazz City chain reads hosted MCP server contribution ([#7972](https://github.com/hashgraph-online/hol-guard/issues/7972)) ([b98ba95](https://github.com/hashgraph-online/hol-guard/commit/b98ba952d37ee9f392fd33ca2ef431991fda5d04))
+
+
+### Bug Fixes
+
+* **approvals:** ask for the approval factor at an inline install prompt ([#8089](https://github.com/hashgraph-online/hol-guard/issues/8089)) ([4b37143](https://github.com/hashgraph-online/hol-guard/commit/4b37143b019723dab8b8726581dd6a79f584430a))
+* **cigar:** let the dashboard read the Usage tab with its session ([#8099](https://github.com/hashgraph-online/hol-guard/issues/8099)) ([6608828](https://github.com/hashgraph-online/hol-guard/commit/660882878470919d619aa9593fdc4a1c845c213c))
+* **cloud-policy:** stop the production-deploy rule from holding plain reads ([#8039](https://github.com/hashgraph-online/hol-guard/issues/8039)) ([8511e4d](https://github.com/hashgraph-online/hol-guard/commit/8511e4dd9bf4c8b59b4d3134809805cb5e42a567))
+* **codex:** keep approved, contained and Guard-guide Codex calls from being held again ([#8046](https://github.com/hashgraph-online/hol-guard/issues/8046)) ([6a1e588](https://github.com/hashgraph-online/hol-guard/commit/6a1e588c4bcc77b2f028600fb53c38b95afb4881))
+* **command:** review awk fields and loop values instead of blocking them ([#7976](https://github.com/hashgraph-online/hol-guard/issues/7976)) ([e1b05a1](https://github.com/hashgraph-online/hol-guard/commit/e1b05a1f314fa2bf1ee19bddb333ad54d44e8825))
+* **dashboard:** offer cleanup for leftover harness files ([#7996](https://github.com/hashgraph-online/hol-guard/issues/7996)) ([aaea9d2](https://github.com/hashgraph-online/hol-guard/commit/aaea9d22a84c640801aac9965bc5f2688bb92fc5))
+* **dashboard:** turn protection on from the Watch banner without leaving the page ([#8087](https://github.com/hashgraph-online/hol-guard/issues/8087)) ([71a027f](https://github.com/hashgraph-online/hol-guard/commit/71a027ff8daa78e3fc104cc9495097d5293bc3c5))
+* **guard:** allow an Oh My Pi goal call to keep the session's own objective ([#8113](https://github.com/hashgraph-online/hol-guard/issues/8113)) ([101cac9](https://github.com/hashgraph-online/hol-guard/commit/101cac9959714256327f7f5456fa449ac7873595))
+* **guard:** allow checking for a missing build folder by its full path ([#8065](https://github.com/hashgraph-online/hol-guard/issues/8065)) ([28b230e](https://github.com/hashgraph-online/hol-guard/commit/28b230e587e7a3af33e838cab9540c8325e5840f))
+* **guard:** allow find to filter by a written date ([#8067](https://github.com/hashgraph-online/hol-guard/issues/8067)) ([55e1fb5](https://github.com/hashgraph-online/hol-guard/commit/55e1fb501e87cdc59b0a2fce73be6d340f6abf7e))
+* **guard:** allow listing a route folder by its full path ([#8064](https://github.com/hashgraph-online/hol-guard/issues/8064)) ([ee6e5f6](https://github.com/hashgraph-online/hol-guard/commit/ee6e5f66787d8e84df0c7139028a029d61c4161b))
+* **guard:** allow reading one GitHub variable by name ([#8066](https://github.com/hashgraph-online/hol-guard/issues/8066)) ([2976531](https://github.com/hashgraph-online/hol-guard/commit/29765313efc53375238f8f6fafacfc135d345957))
+* **guard:** apply the stage-by-name git rule to git stage ([#8115](https://github.com/hashgraph-online/hol-guard/issues/8115)) ([4d0ae17](https://github.com/hashgraph-online/hol-guard/commit/4d0ae17540d112b7217357e3d20c03ea4c3553e4))
+* **guard:** block Oh My Pi edits whose first header cannot be read ([#8106](https://github.com/hashgraph-online/hol-guard/issues/8106)) ([86da1d5](https://github.com/hashgraph-online/hol-guard/commit/86da1d512ea96fd4e7ba35e34200dbd1526e9a9a))
+* **guard:** carry a package install's Always allow to linked worktrees ([#8081](https://github.com/hashgraph-online/hol-guard/issues/8081)) ([3cfdbf0](https://github.com/hashgraph-online/hol-guard/commit/3cfdbf0fb6bc9a29bfac9ac83cf15c736186cc53))
+* **guard:** check for a file beside the project without asking first ([#8117](https://github.com/hashgraph-online/hol-guard/issues/8117)) ([94d4f35](https://github.com/hashgraph-online/hol-guard/commit/94d4f35840abd4482251281b4c3a3a7904f5692f))
+* **guard:** keep a filtered search from withdrawing the user's Git Allow ([#8097](https://github.com/hashgraph-online/hol-guard/issues/8097)) ([c05ac91](https://github.com/hashgraph-online/hol-guard/commit/c05ac91aa4f7d27a72134500bd43dad24df7c1bf))
+* **guard:** keep a Git Allow when the command discards its output ([#8100](https://github.com/hashgraph-online/hol-guard/issues/8100)) ([917054c](https://github.com/hashgraph-online/hol-guard/commit/917054cc755a757f781cf389235f3a1eae362b7e))
+* **guard:** keep a test runner's stand-in credentials readable in tool output ([#8093](https://github.com/hashgraph-online/hol-guard/issues/8093)) ([a8cf979](https://github.com/hashgraph-online/hol-guard/commit/a8cf9798e4e046fa5297812b8a3d713da072fbb6))
+* **guard:** keep an allow for the steps a doubtful cd cannot change ([#8098](https://github.com/hashgraph-online/hol-guard/issues/8098)) ([cf0c1d3](https://github.com/hashgraph-online/hol-guard/commit/cf0c1d37a6b371f0dd08d97eae844089e16b433c))
+* **guard:** keep own inspection from bypassing independent review floors ([#7909](https://github.com/hashgraph-online/hol-guard/issues/7909)) ([1e7c4fb](https://github.com/hashgraph-online/hol-guard/commit/1e7c4fb62830767ad3309123abecf928a47ef08d))
+* **guard:** keep reading a command whose quotes hold a hash after an operator ([#8112](https://github.com/hashgraph-online/hol-guard/issues/8112)) ([137e5f8](https://github.com/hashgraph-online/hol-guard/commit/137e5f83780b84473cf9cdf9143a1959ac8a6b1b))
+* **guard:** let a recursive search prove a screenshot of ordinary size ([#8105](https://github.com/hashgraph-online/hol-guard/issues/8105)) ([94633f7](https://github.com/hashgraph-online/hol-guard/commit/94633f7258b921cd7edb912a3144f6a7d70a7dcd))
+* **guard:** let a recursive search walk a committed hidden folder of documents ([#8071](https://github.com/hashgraph-online/hol-guard/issues/8071)) ([8e03859](https://github.com/hashgraph-online/hol-guard/commit/8e03859b228a80c42badda6f6cdc7ad883df6527))
+* **guard:** let an agent prune stale worktree records from the worktree it just finished ([#8104](https://github.com/hashgraph-online/hol-guard/issues/8104)) ([02ace1f](https://github.com/hashgraph-online/hol-guard/commit/02ace1f4ed0c831ea7e31c7561b77dc491fed6a6))
+* **guard:** let find list file times in a sibling repository ([#8070](https://github.com/hashgraph-online/hol-guard/issues/8070)) ([ab7f000](https://github.com/hashgraph-online/hol-guard/commit/ab7f000da2bf8d084adad7b08e52d6ca3fb5af4e))
+* **guard:** preserve secret floor for option-shaped Git pathspecs after -- ([#8101](https://github.com/hashgraph-online/hol-guard/issues/8101)) ([6e8fb34](https://github.com/hashgraph-online/hol-guard/commit/6e8fb343d9cbd3ac7820b0a0cfb4b26edb401b6e))
+* **guard:** read an input redirect on a later command as that command's read ([#8069](https://github.com/hashgraph-online/hol-guard/issues/8069)) ([18bbee8](https://github.com/hashgraph-online/hol-guard/commit/18bbee810f468c4843d3f3dbd8a6fe318817af62))
+* **guard:** read an Oh My Pi commit whose body is passed as a string ([#8014](https://github.com/hashgraph-online/hol-guard/issues/8014)) ([173af6f](https://github.com/hashgraph-online/hol-guard/commit/173af6f41cb91575ee3eb71c26055c15cbb1f3dc))
+* **guard:** read below a directory whose name holds parentheses ([#8121](https://github.com/hashgraph-online/hol-guard/issues/8121)) ([79673fb](https://github.com/hashgraph-online/hol-guard/commit/79673fb90230c52ade259d107f86df10a35c1a30))
+* **guard:** read code in a heredoc commit message as message text ([#8026](https://github.com/hashgraph-online/hol-guard/issues/8026)) ([cb78985](https://github.com/hashgraph-online/hol-guard/commit/cb78985e11269ad236270d329f8c8220d8939e20))
+* **guard:** read decorated Oh My Pi hashline headers the way Oh My Pi does ([#8074](https://github.com/hashgraph-online/hol-guard/issues/8074)) ([f32772e](https://github.com/hashgraph-online/hol-guard/commit/f32772e0dbd6a1352e50b20080e1a44d715d534d))
+* **guard:** read find walks that pick files from a choice of names ([#8050](https://github.com/hashgraph-online/hol-guard/issues/8050)) ([70bbf64](https://github.com/hashgraph-online/hol-guard/commit/70bbf641b2304b220e663b509fc4e23e57195838))
+* **guard:** record only the tool-result withholding Claude Code and Codex perform ([#8035](https://github.com/hashgraph-online/hol-guard/issues/8035)) ([24b1e49](https://github.com/hashgraph-online/hol-guard/commit/24b1e49055f579da9db64d82faebc68ae3e75dbd))
+* **guard:** review a commit draft that shows a secret file's hunks ([#7974](https://github.com/hashgraph-online/hol-guard/issues/7974)) ([32a1f74](https://github.com/hashgraph-online/hol-guard/commit/32a1f747f24bb4f6e2adadd402cd33cedc13d7f3))
+* **guard:** review heredoc Python after a quoted word or a cd into the workspace instead of blocking it ([#8036](https://github.com/hashgraph-online/hol-guard/issues/8036)) ([c4338ff](https://github.com/hashgraph-online/hol-guard/commit/c4338ffbbbe2b77d5946b0db2e6dbfaaf75e9f64))
+* **guard:** run heredoc Python with accented text in strings or comments in the sandbox ([#8048](https://github.com/hashgraph-online/hol-guard/issues/8048)) ([5dd6ad9](https://github.com/hashgraph-online/hol-guard/commit/5dd6ad9bb0d267528b0c23f4fd5a6fe86dfc4e06))
+* **guard:** safely allow bounded OMP browser development preludes ([#8012](https://github.com/hashgraph-online/hol-guard/issues/8012)) ([51cc21b](https://github.com/hashgraph-online/hol-guard/commit/51cc21b416a7464d32e2ca1d2f78e5b95d2654f7))
+* **guard:** screen a long script for a whole-tree stage spelled as a pathspec ([#8128](https://github.com/hashgraph-online/hol-guard/issues/8128)) ([2e3f870](https://github.com/hashgraph-online/hol-guard/commit/2e3f870ee961f28cbd34290bdfd48c383857744f))
+* **guard:** screen bracketed search paths as the literal entry they may name ([#8068](https://github.com/hashgraph-online/hol-guard/issues/8068)) ([9351e92](https://github.com/hashgraph-online/hol-guard/commit/9351e922663b93881cf3b61da5e2eedd20053f98))
+* **guard:** scrub commands in receipt and approval events queued for Guard Cloud ([#8040](https://github.com/hashgraph-online/hol-guard/issues/8040)) ([1bf6b07](https://github.com/hashgraph-online/hol-guard/commit/1bf6b07f37b150adf561da2620b9dd0750244ee1))
+* **guard:** stop Oh My Pi edits whose header names a missing file ([#8018](https://github.com/hashgraph-online/hol-guard/issues/8018)) ([e1d3a0c](https://github.com/hashgraph-online/hol-guard/commit/e1d3a0c1e9d4bf560a36d7aa000852bbf39c5702))
+* **guard:** tell agents to keep an Oh My Pi commit draft in one eval cell ([#8037](https://github.com/hashgraph-online/hol-guard/issues/8037)) ([495d484](https://github.com/hashgraph-online/hol-guard/commit/495d484aab75c7cfe5119e9bde373b93f1696f58))
+* **guard:** treat `git stage` as the synonym of `git add` it is ([#8102](https://github.com/hashgraph-online/hol-guard/issues/8102)) ([8a749d5](https://github.com/hashgraph-online/hol-guard/commit/8a749d51d62ce34d9daa5f76d08fa3331958d875))
+* **guard:** verify shell HOME before allowing tilde bin listings ([#7801](https://github.com/hashgraph-online/hol-guard/issues/7801)) ([819e349](https://github.com/hashgraph-online/hol-guard/commit/819e3495a4a58dacc1c4f7126cf6961614141017))
+* **muse:** show prompt notices, and replay every Claude Code tool on the installed build ([#8025](https://github.com/hashgraph-online/hol-guard/issues/8025)) ([ea66da9](https://github.com/hashgraph-online/hol-guard/commit/ea66da9d52fbcc18c26277f114d24b0beb5ca428))
+
+
+### Performance Improvements
+
+* **ci:** remove duplicate pull request wheel build ([#8004](https://github.com/hashgraph-online/hol-guard/issues/8004)) ([2c86ed2](https://github.com/hashgraph-online/hol-guard/commit/2c86ed25cdfea5e8171aba817c4ca419a4bf6011))
+* **guard:** keep the verified runtime copy for later processes ([#8013](https://github.com/hashgraph-online/hol-guard/issues/8013)) ([4f1a8ba](https://github.com/hashgraph-online/hol-guard/commit/4f1a8bab8652f030a06e73bd4b997da0d1fdc75a))
+* **publish:** lower alpha native workspace optimization ([#8125](https://github.com/hashgraph-online/hol-guard/issues/8125)) ([070e1d4](https://github.com/hashgraph-online/hol-guard/commit/070e1d45d639106c21a782d7c92ea5d5a76168d1))
+
+
+### Documentation
+
+* **benchmarks:** add CIGAR results for 3.60.0a121 and two hold fixes ([#8061](https://github.com/hashgraph-online/hol-guard/issues/8061)) ([3fb92ae](https://github.com/hashgraph-online/hol-guard/commit/3fb92aedc9bedd4a96113913c1d231dfcb6bb79d))
+* **cigar:** add 3.61 preview benchmark results ([#8086](https://github.com/hashgraph-online/hol-guard/issues/8086)) ([1485957](https://github.com/hashgraph-online/hol-guard/commit/148595799c26a68c76752ffa7ccddf29a9168fec))
+* **cursor:** record the CLI's hook events and review built-in terminal coverage ([#8044](https://github.com/hashgraph-online/hol-guard/issues/8044)) ([80ac3c4](https://github.com/hashgraph-online/hol-guard/commit/80ac3c43d04940fcb11e3baad8a387978e9be0d8))
+* **guard:** say which Claude Code session modes load Guard's hooks ([#8038](https://github.com/hashgraph-online/hol-guard/issues/8038)) ([d3a28ab](https://github.com/hashgraph-online/hol-guard/commit/d3a28aba8643c01e60f3039f1e45da93a6961987))
+
 ## [3.60.0](https://github.com/hashgraph-online/hol-guard/compare/v3.59.0...v3.60.0) (2026-11-19)
 
 
