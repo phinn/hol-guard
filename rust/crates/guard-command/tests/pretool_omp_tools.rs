@@ -141,6 +141,30 @@ fn a_goal_call_keeps_only_the_session_objective() {
     );
     assert!(allowed(&written));
     assert_eq!(written.reason_code, "native_omp_goal_state");
+    // The shapes Oh My Pi actually sends: the per-call intent line, an unset
+    // objective and budget written as `null`, and a budget written as digits.
+    for input in [
+        json!({"op": "complete", "i": "Complete the goal"}),
+        json!({"op": "get", "objective": null, "token_budget": null}),
+        json!({"op": "create", "i": "Start the goal", "objective": "Fix the review", "token_budget": 200000}),
+        json!({"op": "create", "objective": "Fix the review", "token_budget": "200000"}),
+        json!({"op": "resume", "i": "Reactivate", "objective": "Fix the review", "token_budget": null}),
+    ] {
+        let result = omp(&f, "goal", input.clone());
+        assert!(allowed(&result), "{input}");
+        assert_eq!(result.reason_code, "native_omp_goal_state", "{input}");
+    }
+    // A budget that is not a count of tokens is not Oh My Pi's field.
+    for budget in [json!("80k"), json!(""), json!(-1), json!(1.5), json!(true)] {
+        assert!(
+            !allowed(&omp(
+                &f,
+                "goal",
+                json!({"op": "create", "token_budget": budget})
+            )),
+            "{budget}"
+        );
+    }
     // Another harness, another spelling, an unknown op, a key Oh My Pi does
     // not send, or a value of another type is not this input.
     assert!(!allowed(&run(
@@ -166,6 +190,16 @@ fn a_goal_call_keeps_only_the_session_objective() {
         &f,
         "goal",
         json!({"op": "create", "objective": {"read": ".env"}})
+    )));
+    assert!(!allowed(&omp(
+        &f,
+        "goal",
+        json!({"op": "create", "i": {"read": ".env"}})
+    )));
+    assert!(!allowed(&omp(
+        &f,
+        "goal",
+        json!({"op": "create", "i": "Read the key", "path": ".ssh/id_rsa"})
     )));
 }
 

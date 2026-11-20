@@ -11956,6 +11956,66 @@
       "expect": "allow"
     },
     {
+      "id": "omp-goal-complete-with-the-intent-line",
+      "fix_area": "omp",
+      "harnesses": [
+        "omp"
+      ],
+      "tool": "goal",
+      "tool_input": {
+        "op": "complete",
+        "i": "Complete the goal"
+      },
+      "cwd": "worktree",
+      "expect": "allow"
+    },
+    {
+      "id": "omp-goal-get-with-an-unset-objective",
+      "fix_area": "omp",
+      "harnesses": [
+        "omp"
+      ],
+      "tool": "goal",
+      "tool_input": {
+        "op": "get",
+        "objective": null,
+        "token_budget": null
+      },
+      "cwd": "worktree",
+      "expect": "allow"
+    },
+    {
+      "id": "omp-goal-create-with-a-budget-written-as-digits",
+      "fix_area": "omp",
+      "harnesses": [
+        "omp"
+      ],
+      "tool": "goal",
+      "tool_input": {
+        "op": "create",
+        "i": "Start the goal",
+        "objective": "Add the missing regression case and open the pull request",
+        "token_budget": "200000"
+      },
+      "cwd": "worktree",
+      "expect": "allow"
+    },
+    {
+      "id": "neg-omp-goal-carrying-a-private-key-path",
+      "fix_area": "omp",
+      "harnesses": [
+        "omp"
+      ],
+      "tool": "goal",
+      "tool_input": {
+        "op": "create",
+        "i": "Start the goal",
+        "path": "${HOME}/.ssh/id_rsa"
+      },
+      "cwd": "worktree",
+      "expect": "not_allow"
+    },
+    {
       "id": "omp-ls",
       "fix_area": "omp",
       "harnesses": [
